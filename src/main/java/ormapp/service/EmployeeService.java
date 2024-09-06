@@ -19,11 +19,19 @@ public class EmployeeService {
 		
 		
 		
-		
+		//  
 		
 		
 		
 		return empDao.addEmployee(emp);
 	}
 
+	
+	
+	public Employee deleteEmpService(Integer empid) throws EmployeeException {
+		
+		   return  empDao.deleteEmployee(empid);
+	}
+	
+	
 }

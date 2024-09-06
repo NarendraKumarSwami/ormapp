@@ -11,4 +11,7 @@ public interface EmployeeDao {
 	public Employee updateEmployeeName(Integer empId, String newName);
 	
 	
+	public Employee deleteEmployee(Integer empid) throws EmployeeException;
+	
+	
 }

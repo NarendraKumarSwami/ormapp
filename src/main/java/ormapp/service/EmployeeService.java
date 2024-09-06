@@ -1,5 +1,7 @@
 package ormapp.service;
 
+import java.util.List;
+
 import ormapp.dao.EmployeeDao;
 import ormapp.exception.EmployeeException;
 import ormapp.model.Employee;
@@ -33,5 +35,13 @@ public class EmployeeService {
 		   return  empDao.deleteEmployee(empid);
 	}
 	
+	public List<Employee> getEmployeeWithSalaryRange(int range) throws EmployeeException{
+		
+		
+		 return  empDao.getEmployeeWithRange(range);
+		
+		  
+		
+	}
 	
 }

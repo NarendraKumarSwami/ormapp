@@ -1,6 +1,9 @@
 package ormapp.dao;
 
+import java.util.List;
+
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import ormapp.connection.MysqlEntityManager;
 import ormapp.exception.EmployeeException;
 import ormapp.model.Employee;
@@ -29,6 +32,7 @@ public class EmployeeDaoImpMysql  implements EmployeeDao {
 			 
 			 
 			 em.merge(emp);
+			 
 			 
 			
 			 
@@ -74,6 +78,35 @@ public class EmployeeDaoImpMysql  implements EmployeeDao {
 	    	   throw new EmployeeException("There is no employee with this id : "+ empid);
 	       }
 		
+	}
+
+	@Override
+	public List<Employee> getEmployeeWithRange(int range) throws EmployeeException {
+		// TODO Auto-generated method stub
+		
+//		Query query = em.createQuery("SELECT e FROM Employee e WHERE e.salary >= :range ");
+//		
+//		query.setParameter("range", range);
+//		
+//		  
+//		
+//		 List<Employee> list =  (List<Employee>)query.getResultList();
+		
+		
+//		 Query q = em.createNamedQuery("minimum salary list");
+//		 
+//		 q.setParameter("range", range);
+//		 
+//		  List<Employee> list =   (List<Employee> ) q.getResultList();
+		
+		
+	  Query q =	em.createNativeQuery("SELECT * FROM employee e where e.salary>= ?1", Employee.class);
+	  
+	     q.setParameter(1, range);
+	     
+	   List<Employee> list =   ( List<Employee>)   q.getResultList();
+		 
+		return list;
 	}
     
 	

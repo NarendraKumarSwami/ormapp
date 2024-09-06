@@ -4,10 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="employee")
+@NamedQueries({
+	@NamedQuery(query = "SELECT e FROM Employee e WHERE e.salary >= :range", name="minimum salary list")
+})
 public class Employee {
 
 	  @Id

@@ -1,8 +1,8 @@
 package ormapp;
 
+import java.util.List;
 import java.util.Scanner;
 
-import ormapp.connection.MysqlEntityManager;
 import ormapp.dao.EmployeeDao;
 import ormapp.dao.EmployeeDaoImpMysql;
 import ormapp.exception.EmployeeException;
@@ -25,10 +25,11 @@ public class App {
 		 System.out.println("To perfrom operation,  choose a options");
 		 System.out.println("Add employee enter : 1 ");
 		 System.out.println("Delete employee enter : 2");
+		 System.out.println("Get List of employee with minimum slaray: 3");
 		 
 		  int num  = sc.nextInt();
 		  
-		  
+		  EmployeeService es = new EmployeeService(new EmployeeDaoImpMysql());
 		  switch (num) {
 		case 1:
 			System.out.println("Add Employee :");
@@ -55,12 +56,12 @@ public class App {
 			  EmployeeDao empDao = new EmployeeDaoImpMysql();
 			  
 			  
-			  EmployeeService empService = new EmployeeService(empDao);
+			  
 			  
 			  String result = null;
 			  
 			  try {
-				 result =  empService.addEmployeeService(emp);
+				 result =  es.addEmployeeService(emp);
 			} catch (EmployeeException e) {
 				// TODO Auto-generated catch block
 				
@@ -76,7 +77,7 @@ public class App {
 			  System.out.println("Enter the employee id to delete :");
 			   int id =  sc.nextInt();
 			   
-			     EmployeeService es = new EmployeeService(new EmployeeDaoImpMysql());
+			    
 			     
 			try {
 			    Employee emp1 =	es.deleteEmpService(id);
@@ -89,7 +90,22 @@ public class App {
 			}
 			
 			break;
+		case 3 :
+			System.out.println("Enter the minimum salary");
+			 int salary1 =  sc.nextInt();
+			
+			
+			 try {
+			   List<Employee> emps =	es.getEmployeeWithSalaryRange(salary1);
+			   
+			      emps.forEach(System.out::println);
+			      
+			} catch (EmployeeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
+			 
 		default:
 			break;
 		}
